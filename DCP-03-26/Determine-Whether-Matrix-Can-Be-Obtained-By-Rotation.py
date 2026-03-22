@@ -1,17 +1,20 @@
-1import numpy as np
-2
-3class Solution:
-4    def findRotation(self, mat, target):
-5        
-6        rotated = mat
-7        
-8        # check 0° rotation first
-9        if np.array_equal(rotated, target):
-10            return True
-11        
-12        for i in range(3):
-13            rotated = np.rot90(rotated, k=-1)
-14            if np.array_equal(rotated, target):
-15                return True
-16        
-17        return False
+1class Solution:
+2    def findRotation(self, mat, target):
+3        
+4        def rotate(matrix):
+5           
+6            n = len(matrix)
+7            new = [[0]*n for _ in range(n)]
+8            
+9            for i in range(n):
+10                for j in range(n):
+11                    new[j][n - 1 - i] = matrix[i][j]
+12            
+13            return new
+14        
+15        for _ in range(4):  
+16            if mat == target:
+17                return True
+18            mat = rotate(mat)
+19        
+20        return False
